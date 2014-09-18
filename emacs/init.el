@@ -8,3 +8,5 @@
 (global-set-key [f7] 'find-tag)
 ;; Bind F8 to pop back
 (global-set-key [f8] "\M-*")
+;; Bind F9 to continue to next occurrence.
+(global-set-key [f9] "\C-u\M-.")
