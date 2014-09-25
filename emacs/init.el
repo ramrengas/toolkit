@@ -1,4 +1,6 @@
 (require 'cc-mode)
+;; Use c++-mode syntax highlighting for .h
+(add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
 ;; Load the TAGS file.
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html#Select-Tags-Table
