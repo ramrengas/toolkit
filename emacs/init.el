@@ -1,6 +1,14 @@
 (require 'cc-mode)
+(require 'google-c-cstyle)
+
+;; Google C++ Style
+(add-hook 'c-mode-common-hook 'google-set-c-style)
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
 ;; Use c++-mode syntax highlighting for .h
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
+
+
 
 ;; Load the TAGS file.
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html#Select-Tags-Table
