@@ -1,5 +1,8 @@
+;; Add the path for loading emacs modules.
+(add-to-list 'load-path "~/.emacs.d/")
 (require 'cc-mode)
-(require 'google-c-cstyle)
+(require 'google-c-style)
+(require 'column-marker)
 
 ;; Google C++ Style
 (add-hook 'c-mode-common-hook 'google-set-c-style)
@@ -8,11 +11,14 @@
 ;; Use c++-mode syntax highlighting for .h
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-
+;; Show column numbers
+(setq column-number-mode t)
+;; Highlight 80 columns
+(add-hook 'c-mode-common-hook (lambda () (interactive) (column-marker-1 80)))
 
 ;; Load the TAGS file.
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html#Select-Tags-Table
-(setq tags-table-list '("~/rtbkit"))
+(setq tags-table-list '("/work/projects/beeswaxio/honeycomb"))
 
 ;; Bind F7 to find-tag
 (global-set-key [f7] 'find-tag)
