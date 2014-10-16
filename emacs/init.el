@@ -3,6 +3,8 @@
 (require 'cc-mode)
 (require 'google-c-style)
 (require 'column-marker)
+(require 'cmake-mode)
+(require 'protobuf-mode)
 
 ;; Google C++ Style
 (add-hook 'c-mode-common-hook 'google-set-c-style)
@@ -15,6 +17,16 @@
 (setq column-number-mode t)
 ;; Highlight 80 columns
 (add-hook 'c-mode-common-hook (lambda () (interactive) (column-marker-1 80)))
+
+;; CMake
+;; Add cmake listfile names to the mode list.
+(setq auto-mode-alist
+      (append
+       '(("CMakeLists\\.txt\\'" . cmake-mode))
+       '(("\\.cmake\\'" . cmake-mode))
+       auto-mode-alist))
+;; Autoload protofiles to the mode list
+(add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
 
 ;; Load the TAGS file.
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html#Select-Tags-Table
