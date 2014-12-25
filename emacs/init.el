@@ -5,18 +5,24 @@
 (require 'column-marker)
 (require 'cmake-mode)
 (require 'protobuf-mode)
+(require 'php-mode)
+
+;; Highlight 80 columns
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(add-hook 'prog-mode-hook 'whitespace-mode)
+;; Show column numbers
+(setq column-number-mode t)
 
 ;; Google C++ Style
 (add-hook 'c-mode-common-hook 'google-set-c-style)
 (add-hook 'c-mode-common-hook 'google-make-newline-indent)
-
 ;; Use c++-mode syntax highlighting for .h
 (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
 
-;; Show column numbers
-(setq column-number-mode t)
-;; Highlight 80 columns
-(add-hook 'c-mode-common-hook (lambda () (interactive) (column-marker-1 80)))
+;; JS/JSON set tab to 2
+(setq js-indent-level 2)
 
 ;; CMake
 ;; Add cmake listfile names to the mode list.
@@ -27,6 +33,9 @@
        auto-mode-alist))
 ;; Autoload protofiles to the mode list
 (add-to-list 'auto-mode-alist '("\\.proto\\'" . protobuf-mode))
+
+;; PHP syntax highlighting for .inc files
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
 ;; Load the TAGS file.
 ;; https://www.gnu.org/software/emacs/manual/html_node/emacs/Select-Tags-Table.html#Select-Tags-Table
