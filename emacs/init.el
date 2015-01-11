@@ -1,3 +1,8 @@
+;; Emacs ELPA Package Manager
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("marmalade" . "https://marmalade-repo.org/packages/")
+                         ("melpa" . "http://melpa.milkbox.net/packages/")))
+
 ;; Add the path for loading emacs modules.
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'cc-mode)
