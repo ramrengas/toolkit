@@ -3,6 +3,10 @@
                          ("marmalade" . "https://marmalade-repo.org/packages/")
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 
+;; Zenburn theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
+
 ;; Add the path for loading emacs modules.
 (add-to-list 'load-path "~/.emacs.d/")
 (require 'cc-mode)
