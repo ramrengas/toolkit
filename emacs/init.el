@@ -9,6 +9,43 @@
 
 (require 'uniquify)
 
+;; Ivy Setup
+(ivy-mode 1)
+(require 'swiper)
+(require 'counsel)
+(setq ivy-use-virtual-buffers t)
+(setq ivy-count-format "(%d/%d) ")
+(global-set-key (kbd "C-s") 'swiper)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+
+(setq ivy-extra-directories nil)
+(defun eh-ivy-open-current-typed-path ()
+  (interactive)
+  (when ivy--directory
+    (let* ((dir ivy--directory)
+           (text-typed ivy-text)
+           (path (concat dir text-typed)))
+      (delete-minibuffer-contents)
+      (ivy--done path))))
+
+(define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
+(define-key ivy-minibuffer-map (kbd "C-f") 'eh-ivy-open-current-typed-path)
+
+;; Projectile
+(require 'projectile)
+(projectile-global-mode)
+
+;; Counsel Projectile
+(counsel-projectile-on)
+
 ;; Zenburn theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
@@ -78,6 +115,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (counsel-projectile counsel swiper ivy scala-mode2)))
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
