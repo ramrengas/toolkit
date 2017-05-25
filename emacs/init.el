@@ -18,13 +18,10 @@
 (global-set-key (kbd "C-s") 'swiper)
 (global-set-key (kbd "M-x") 'counsel-M-x)
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
 (global-set-key (kbd "C-c k") 'counsel-ag)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f2>") 'ivy-next-line-and-call)
+(global-set-key (kbd "<f3>") 'ivy-previous-line-and-call)
 
 (setq ivy-extra-directories nil)
 (defun eh-ivy-open-current-typed-path ()
@@ -45,6 +42,10 @@
 
 ;; Counsel Projectile
 (counsel-projectile-on)
+(global-set-key (kbd "<f1>") 'counsel-projectile-ag)
+
+;; Flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Zenburn theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
@@ -115,7 +116,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (counsel-projectile counsel swiper ivy scala-mode2)))
+ '(package-selected-packages
+   (quote
+    (flycheck counsel-projectile counsel swiper ivy scala-mode2)))
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
