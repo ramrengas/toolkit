@@ -47,6 +47,9 @@
 ;; Flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; Zenburn theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
@@ -118,7 +121,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck counsel-projectile counsel swiper ivy scala-mode2)))
+    (magit flycheck counsel-projectile counsel swiper ivy scala-mode2)))
  '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
