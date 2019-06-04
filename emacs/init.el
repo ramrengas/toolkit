@@ -4,10 +4,10 @@
                          ("melpa" . "http://melpa.milkbox.net/packages/")))
 (require 'package)
 (package-initialize)
-(unless (package-installed-p 'scala-mode2)
-  (package-refresh-contents) (package-install 'scala-mode2))
 
 (require 'uniquify)
+
+(setq-default indent-tabs-mode nil)
 
 ;; Ivy Setup
 (ivy-mode 1)
@@ -35,20 +35,6 @@
 
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 (define-key ivy-minibuffer-map (kbd "C-f") 'eh-ivy-open-current-typed-path)
-
-;; Projectile
-(require 'projectile)
-(projectile-global-mode)
-
-;; Counsel Projectile
-(counsel-projectile-on)
-(global-set-key (kbd "<f1>") 'counsel-projectile-ag)
-
-;; Flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Magit
-(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Zenburn theme
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
