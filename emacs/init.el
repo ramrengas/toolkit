@@ -1,27 +1,48 @@
-;; Emacs ELPA Package Manager
-(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "https://marmalade-repo.org/packages/")
-                         ("melpa" . "http://melpa.milkbox.net/packages/")))
-(require 'package)
-(package-initialize)
+;; Zenburn theme
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
 
+;; Unique names for buffers
 (require 'uniquify)
 
+;; No tabs, spaces
 (setq-default indent-tabs-mode nil)
 
-;; Ivy Setup
-(ivy-mode 1)
-(require 'swiper)
-(require 'counsel)
-(setq ivy-use-virtual-buffers t)
-(setq ivy-count-format "(%d/%d) ")
-(global-set-key (kbd "C-s") 'swiper)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-c k") 'counsel-ag)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "<f2>") 'ivy-next-line-and-call)
-(global-set-key (kbd "<f3>") 'ivy-previous-line-and-call)
+;; Initialize package
+(require 'package)
+;; Emacs ELPA Package Manager
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")))
+(package-initialize)
+
+
+;; Add the path for loading emacs modules.
+(add-to-list 'load-path "~/.emacs.d/lisp/use-package")
+(require 'use-package)
+
+;; Ivy
+(use-package ivy
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-count-format "(%d/%d) "))
+
+(use-package swiper
+  :after ivy
+  :config
+  (global-set-key (kbd "C-s") 'swiper))
+
+(use-package counsel
+  :after ivy
+  :config
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char))
 
 (setq ivy-extra-directories nil)
 (defun eh-ivy-open-current-typed-path ()
@@ -35,10 +56,6 @@
 
 (define-key ivy-minibuffer-map (kbd "<return>") 'ivy-alt-done)
 (define-key ivy-minibuffer-map (kbd "C-f") 'eh-ivy-open-current-typed-path)
-
-;; Zenburn theme
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
-(load-theme 'zenburn t)
 
 ;; Add the path for loading emacs modules.
 (add-to-list 'load-path "~/.emacs.d/lisp")
@@ -100,15 +117,13 @@
    "Major mode for editing GitHub Flavored Markdown files" t)
 (add-to-list 'auto-mode-alist '("README\\.md\\'" . gfm-mode))
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (magit flycheck counsel-projectile counsel swiper ivy scala-mode2)))
- '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify)))
+ '(package-selected-packages (quote (ivy))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
